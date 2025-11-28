@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+
+<div class="container">
+  <h2>Gestión de Vasos</h2>
+
+  <button (click)="openForm()" *ngIf="!showForm">Crear Vaso</button>
+
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ isEditing ? 'Editar Vaso' : 'Nuevo Vaso' }}</h3>
+    <form (ngSubmit)="saveVaso()">
+      <label>Material:</label>
+      <input type="text" [(ngModel)]="vasoForm.material" name="material" required>
+
+      <label>Color:</label>
+      <input type="text" [(ngModel)]="vasoForm.color" name="color" required>
+
+      <label>Capacidad (ml):</label>
+      <input type="number" [(ngModel)]="vasoForm.capacidad" name="capacidad" required>
+
+      <label>Contenido:</label>
+      <input type="text" [(ngModel)]="vasoForm.contenido" name="contenido" required>
+
+      <div class="form-buttons">
+        <button class="submit">guardar</button>
+        <button type="button" (click)="closeForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Material</th>
+        <th>Color</th>
+        <th>Capacidad</th>
+        <th>Contenido</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vaso of vasos">
+        <td>{{ vaso.id }}</td>
+        <td>{{ vaso.material }}</td>
+        <td>{{ vaso.color }}</td>
+        <td>{{ vaso.capacidad }} ml</td>
+        <td>{{ vaso.contenido }}</td>
+        <td>
+          <button (click)="editVaso(vaso)">Editar</button>
+          <button (click)="deleteVaso(vaso.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fdfaf7;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px;
+    background-color: #fffdf9;
+}
+
+.hero-texto {
+    max-width: 45%;
+}
+
+.descripcion {
+    font-size: 32px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.hero-imagen {
+    position: relative;
+}
+
+.vaso {
+    width: 230px;
+}
+
+.cuchara {
+    width: 260px;
+    position: absolute;
+    bottom: -20px;
+    left: -60px;
+    opacity: 0.92;
+}
+
