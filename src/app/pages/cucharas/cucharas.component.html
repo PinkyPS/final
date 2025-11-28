@@ -1,0 +1,60 @@
+<app-menu></app-menu>
+
+<div class="container">
+  <h2>Gestión de Cucharas</h2>
+
+  <button (click)="openForm()" *ngIf="!showForm">Crear Nueva Cuchara</button>
+
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ isEditing ? 'Editar Cuchara' : 'Nueva Cuchara' }}</h3>
+    <form (ngSubmit)="saveCuchara()">
+      <label>Material:</label>
+      <input type="text" [(ngModel)]="cucharaForm.material" name="material" required>
+
+      <label>Tamaño:</label>
+      <input type="text" [(ngModel)]="cucharaForm.tamano" name="tamano" required>
+
+      <label>Vaso (Opcional):</label>
+      <select [(ngModel)]="cucharaForm.vasoId" name="vasoId">
+        <option [value]="null">Sin vaso</option>
+        <option *ngFor="let vaso of vasos" [value]="vaso.id">
+          {{ vaso.id }} - {{ vaso.material }} {{ vaso.color }} ({{ vaso.capacidad }}ml)
+        </option>
+      </select>
+
+      <div class="form-buttons">
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="closeForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Material</th>
+        <th>Tamaño</th>
+        <th>Vaso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuchara of cucharas">
+        <td>{{ cuchara.id }}</td>
+        <td>{{ cuchara.material }}</td>
+        <td>{{ cuchara.tamano }}</td>
+        <td>
+          <span *ngIf="cuchara.vaso">
+            Vaso #{{ cuchara.vaso.id }} ({{ cuchara.vaso.material }})
+          </span>
+          <span *ngIf="!cuchara.vaso">Sin vaso</span>
+        </td>
+        <td>
+          <button (click)="editCuchara(cuchara)">Editar</button>
+          <button (click)="deleteCuchara(cuchara.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
